@@ -1,7 +1,6 @@
 {
   "name": "netflix-clone1",
-  "homepage": "https://github.com/Dbetter66/netflix-clone.git",
-  "private": true,
+  "homepage": "https://github.com/Dbetter66/netflix-clone.git/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
