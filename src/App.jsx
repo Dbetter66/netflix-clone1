@@ -4,6 +4,8 @@ import Spinner from './components/Spinner.jsx'
 import MovieCard from './components/MovieCard.jsx'
 import { useDebounce } from 'react-use'
 import { getTrendingMovies, updateSearchCount } from './appwrite.js'
+import Homepage from "./components/Homepage.jsx";
+import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom'
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -16,6 +18,8 @@ const API_OPTIONS = {
         Authorization: `Bearer ${API_KEY}`
     }
 }
+
+
 
 const App = () => {
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
@@ -85,16 +89,21 @@ const App = () => {
         loadTrendingMovies();
     }, []);
 
+
+    const handleSort = (order) => {
+        setSearchTerm(order);
+    };
+
     return (
         <main>
+
             <div className="pattern"/>
 
             <div className="wrapper">
                 <header>
-                    <img src="./hero.png" alt="Hero Banner" />
                     <h1>Find <span className="text-gradient">Movies</span> You'll Enjoy Without the Hassle</h1>
 
-                    <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                    <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                 </header>
 
                 {trendingMovies.length > 0 && (
@@ -105,24 +114,32 @@ const App = () => {
                             {trendingMovies.map((movie, index) => (
                                 <li key={movie.$id}>
                                     <p>{index + 1}</p>
-                                    <img src={movie.poster_url} alt={movie.title} />
+                                    <img src={movie.poster_url} alt={movie.title}/>
                                 </li>
                             ))}
                         </ul>
                     </section>
                 )}
 
+
+
                 <section className="all-movies">
                     <h2>All Movies</h2>
+                    <p className="text-white container">
+                        Search Results
+                        <button className="container hover:m-1" onClick={() => handleSort('z-a')}>A-Z</button>
+                        <button className="container hover:m-1" onClick={() => handleSort('a-z')}>Z-A</button>
+
+                    </p>
 
                     {isLoading ? (
-                        <Spinner />
+                        <Spinner/>
                     ) : errorMessage ? (
                         <p className="text-red-500">{errorMessage}</p>
                     ) : (
                         <ul>
                             {movieList.map((movie) => (
-                                <MovieCard key={movie.id} movie={movie} />
+                                <MovieCard key={movie.id} movie={movie}/>
                             ))}
                         </ul>
                     )}
