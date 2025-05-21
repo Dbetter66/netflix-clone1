@@ -90,7 +90,7 @@ const App = () => {
 
 
     const handleSort = (order) => {
-        setSearchTerm(order);
+        fetchMovies(order);
     };
 
     return (
