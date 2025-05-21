@@ -4,8 +4,7 @@ import Spinner from './components/Spinner.jsx'
 import MovieCard from './components/MovieCard.jsx'
 import { useDebounce } from 'react-use'
 import { getTrendingMovies, updateSearchCount } from './appwrite.js'
-import Homepage from "./components/Homepage.jsx";
-import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom'
+
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 
